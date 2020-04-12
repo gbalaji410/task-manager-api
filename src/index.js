@@ -1,7 +1,7 @@
+'use strict'
 const app = require('./app')
-
+const Hapi = require('@hapi/hapi')
 const port = process.env.PORT
-
 // const upload = multer({
 //     dest: 'images',
 //     limits: {
@@ -23,6 +23,18 @@ const port = process.env.PORT
 //     res.status(400).send({error: error.message})
 // })
 
-app.listen(port, () => {
-    console.log('Server is up on ' + port)
-})
+// app.listen(port, () => {
+//     console.log('Server is up on ' + port)
+// })
+
+const init = async () => {
+    const server = Hapi.server({
+        port: 3000,
+        host: 'localhost'
+    })
+    await server.register([require('./routers/user-plugin')])
+    await server.start()
+    console.log('Server running on port ' + port);
+}
+
+init()

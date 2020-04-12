@@ -133,4 +133,4 @@ router.get('/users/:id/avatar', async (req, res) => {
 })
 
 
-module.exports = router
+module.exports = userPlugin
